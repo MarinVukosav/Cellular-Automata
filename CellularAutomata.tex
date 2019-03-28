@@ -1,0 +1,1617 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+\usepackage[croatian]{babel}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    % \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+\definecolor{linkcolor}{rgb}{.0,0.0,0.0}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Stanični automati}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    \title{Stanični automati}
+\author{Marin Vukosav}
+\date{Split, 13. lipnja 2018.}
+
+    \begin{document}
+    
+\pagestyle{empty}
+    \maketitle
+\clearpage
+
+\tableofcontents    
+\clearpage
+\pagestyle{plain}
+
+\setcounter{page}{3}    
+    % \section{Stanični automati}\label{staniux10dni-automati}
+
+\section{Uvod}\label{uvod}
+
+\subsection{Povijest}\label{povijest}
+
+Na početku ovog rada ističe se John von Neumann sa svojom idejom o
+\emph{teoriji automata} iz 1948. godine iz koje kasnije razvija zamisao
+o staničnim automatima. U samom početku, von Neumann pokušava pronaći
+umjetni sustav koji bi bio jednako snažan kao i univerzalni Turingov
+stroj te koji bi imao mogućnost reprodukcije pa i konstrukcije
+unutarnjih komponenti. John nažalost ne uspijeva pronaći takav sustav,
+ali uz pomoć kolega dolazi do ideje \emph{"2-dimensional paper
+automaton"} sa staničnom strukturom koja je sadržavala opciju
+samo-reprodukcije. Iz takvog koncepta, razvijaju se 2 smjera: stanični
+automati se proučavaju kao paralelni modeli računanja i dinamičkih
+sustava te stanični automati kao model prirodnih procesa u fizici,
+kemiji, biologiji, ekonomiji, itd.
+
+\subsection{Definicija}\label{definicija}
+
+Stanični automat ili stanični prostor je apstraktni objekt koji sadrži dvije
+unutarnje vezane komponente. Prva komponenta, \textbf{regularna},
+\textbf{diskretna}, \textbf{konačna mreža}, koja predstavlja
+\emph{arhitekturu} ili \emph{prostornu strukturu} od staničnog automata.
+Druga, konačni automat, čija će se kopija prenositi na sve čvorove
+mreže. Svaki tako upleteni čvor naziva se \textbf{stanica} i komunicirat
+će s konačnim brojem drugih stanica, koje određuju njeno susjedstvo.
+Takva komunikacija, \emph{lokalna, deterministička, uniformna i
+sinkrona} određuje \textbf{globalnu evoluciju} sustava, s diskretnim
+vremenskim korakom.
+
+\subsection{Klasični stanični
+automat}\label{klasiux10dni-staniux10dni-automat}
+
+\(d\)-dimenzionalni stanični automat \(d-CA\), \(A\), opisan je s 4
+varijable: \(Z^d\), \(S\), \(N\) i \(\varphi\). Gdje vrijedi:
+
+\begin{itemize}
+\tightlist
+\item
+  \(S\) je konačni skup, od čijih elemenata su sastavljena stanja od
+  \(A\),
+\item
+  \(N\) je konačni podskup od \(Z^d\),
+\end{itemize}
+
+\[ 
+N = \overrightarrow{n_{j}}/\overrightarrow{n_{j}} = (x_{1j},\ldots,x_{dj}),\quad j \in \{1,\ldots,n\},
+\]
+
+zove se \(i\) susjedstvo od \(A\), \(\varphi : S^{n+1} \to S\) je
+lokalna prijenosna funkcija ili lokalno pravilo od \(A\).
+
+\subsection{Susjedstvo}\label{susjedstvo}
+
+Neka je \(A\) stanični automat \((Z^d, S, N, \varphi)\). Susjedstvno
+stanice \(c\) je skup svih stanica mreže koje će lokalno utjecati na
+evoluciju od \(c\). U principu, susjedstvo može biti bilo koji konačni
+skup, ali u realnosti uglavnom se samo neki specijalni slučajevi uzimaju
+u obzir. Najčešće su to ove dvije vrste susjedstva:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Von Neumannovo susjedstvo: \[
+  N_{VN}(\overrightarrow{z}) = \{\overrightarrow{x}/\overrightarrow{x}\},\quad \in Z^d,
+  \] gdje je
+  \(d_{1}(\overrightarrow{z}, \overrightarrow{x})\leqslant 1\) sa
+  zadanim redoslijedom.
+\item
+  Mooreovo susjedstvo: \[
+  N_{M}(\overrightarrow{z}) = \{\overrightarrow{x}/\overrightarrow{x}\},\quad  \in Z^d,
+  \] gdje je
+  \(d_{\infty}(\overrightarrow{z},\overrightarrow{x}) \leqslant 1\) sa
+  zadanim redoslijedom.
+\end{enumerate}
+
+\begin{figure}[hbtp]
+\centering
+\caption{Slika 1. Mooreove susjedstvo (lijevo) i Von neumanovo susjedstvo}
+\includegraphics{CA-Moore.png}
+\end{figure}
+
+% \begin{verbatim}
+%                     Moore                  Von Neumann
+% \end{verbatim}
+
+\subsection{Klasifikacija}\label{klasifikacija}
+
+Primarna klasifikacija staničnih automata, koju je osmislio Stephen
+Wolfram, podijeljena je u 4 grupe: 1. Klasa - automati čiji su uzorci
+generalno stabilni i homogeni 2. Klasa - automati čiji uzorci evoluiraju
+u pretežno stabilne ili oscilirajuće strukture 3. Klasa - automati čiji
+uzorci evoluiraju u pretežno kaotične oblike 4. Klasa - automati čiji
+uzorci postaju ekstremno kompleksni i traju dugo s pojavama stabilnih
+lokalnih struktura
+
+Zadnja klasa se smatra računski univerzalna ili da je sposobna
+simulirati Turingov stroj. Specijalni tipovi staničnih automata su
+\emph{inverzni}, kod kojih samo jedna konfiguracija vodi direktno do
+iduće, i \emph{totalitarni}, kod kojih buduća vrijednost individualne
+ćelije ovisi samo o totalnoj vrijednosti grupe susjednih ćelija.
+
+    \section{Elementarni stanični
+automat}\label{elementarni-staniux10dni-automat}
+
+Elementarni stanični automat je najjednostavnija klasa
+jedno-dimenzionalnih staničnih automata. Mogu poprimiti dvije različite
+vrijednosti za svaku stanicu (0 ili 1) i pravila koje ovisi samo o
+najbližoj susjednoj vrijednosti. Kao rezultat, evolucija elementarnog
+staničnog automata može biti opisana tablicom specificirajući koje
+stanje će određena stanica imati u sljedećoj generaciji na temelju te
+iste stanice, stanice lijevo i stanice desno od sebe. Pošto ima
+\(2 \times 2 \times 2 = 2^3 = 8\) mogućih binarnih stanja za te 3
+stanice postoje \(2^8=256\) elementarnih staničnih automata. Prva
+generacija svakog elementarnog automata je ista: jedna živa (crna)
+stanica sa beskonačnim brojem mrtvih (bijelih) stanica koje je okružuju.
+
+\begin{figure}[hbtp]
+\centering
+\includegraphics{g1.png}
+\caption{Slika 2. Prva generacija elementarnog staničnog automata}
+\end{figure}
+
+\subsection{Pravilo 110}\label{pravilo-110}
+
+Zanimljivo je pravilo 110 čije ponašanje je na granici izmežu
+stabilnosti i kaosa i podsjeća na Conwayovu "Igru Života". Također,
+pravilo 110 je "Turing complete", odnosno bilo koji račun ili računalni
+program se može simulirati koristeći ovaj automat. Pravilo 110 je jedini
+elementarni stanični automat koji je dokazan da je Turingov komplet.
+Funkcija Univerzalnog stroja u pravilu 110 zahtjeva da je beskonačan
+broj lokaliziranih uzoraka ugrađen unutar beskonačnog pozadinskog uzorka
+koji se ponavlja. Taj pozadinski uzorak sadržava 14 ćelija i ponavlja se
+svako 7 iteracija. Uzorak je \textbf{00010011011111}.
+
+\begin{figure}
+\centering
+\includegraphics{110.png} \\
+\includegraphics{CA_rule110.png}
+\caption{Slika 3. Ime "pravilo
+110" dolazi iz činjenice da binarna sekvenca koja definira ovo pravilo
+01101110 predstavljeno kao binarni broj je zapravo decimalna vrijednost
+110.}
+\end{figure}
+\
+\begin{center}
+\begin{tabular}{l||c|c|c|c|c|c|c|c}
+Trenutni uzorak & 111 & 110 & 101 & 100 & 011 & 010 & 001 & 000 \\
+\hline
+Novo stanje za ulaznu ćeliju   & 0 & 1 & 1 & 0 & 1 & 1 & 1 & 0 
+\end{tabular}
+\end{center}
+\clearpage
+
+\subsection{Pravilo 30}\label{pravilo-30}
+
+Pravilo 30 je jednodimenzionalni binarni stanični automat uveden 1983.
+godine od strane Stephena Wolframa. Prema Wolframovoj klasifikaciji,
+pravilo 30 spada u 3. klasu koja prikazuje aperiodnično, kaotično
+ponašanje. Značajno je zbog toga što je Wolfram smatrao da preko ovog
+pravila je moguće objasniti kako jednostavna pravila proizvode
+kompleksne strukture i ponašanja u prirodi. Ono se koristi kao generator
+nasumičnog broja u programu \emph{Mathematica} i predloženo je kao
+mogući ključ za simetričnu kriptografiju.
+
+
+\begin{center}
+\begin{tabular}{l||c|c|c|c|c|c|c|c}
+Trenutni uzorak & 111 & 110 & 101 & 100 & 011 & 010 & 001 & 000 \\
+\hline
+Novo stanje za ulaznu ćeliju   & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 0 
+\end{tabular}
+\end{center}
+
+\begin{figure}
+\centering
+\includegraphics{30.png}
+\caption{Slika 4. Pravilo 30}
+\end{figure}
+
+    Sljedećim kodom su ilustrirana sva moguća pravila elementarnog staničnog
+automata. Koristeći \emph{magic} funkciju inteact u Jupyteru moguće je
+upravljati vrijednosti, odnosno rednim brojem pravila i bez ponovnog
+pokretanja koda dobiti željeni prikaz automata. Koristeći
+IPython.widgets i opcije "Slider" kreira se interaktivna pomična traka.
+Također je moguće upisati željeni broj pravila sa desne strane pomične
+trake. Početno pravilo je postavljeno na pravilo 10.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{n}{number}\PY{o}{=}\PY{l+m+mi}{1}
+        \PY{n}{output\PYZus{}pattern} \PY{o}{=} \PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{numpy}\PY{o}{.}\PY{n}{binary\PYZus{}repr}\PY{p}{(}\PY{n}{number}\PY{p}{,} \PY{n}{width}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{]}
+        \PY{n}{input\PYZus{}pattern} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{:}
+            \PY{n}{input\PYZus{}pattern}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{numpy}\PY{o}{.}\PY{n}{binary\PYZus{}repr}\PY{p}{(}\PY{l+m+mi}{7}\PY{o}{\PYZhy{}}\PY{n}{i}\PY{p}{,} \PY{n}{width}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{]}
+        \PY{n}{columns} \PY{o}{=} \PY{l+m+mi}{21}
+        \PY{n}{rows} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{columns}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}
+        \PY{n}{canvas} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{[}\PY{n}{rows}\PY{p}{,}\PY{n}{columns}\PY{o}{+}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+        \PY{n}{canvas}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{int}\PY{p}{(}\PY{n}{columns}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{=}\PY{l+m+mi}{1}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{numpy}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{rows}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n}{numpy}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{columns}\PY{p}{)}\PY{p}{:}
+                \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{if} \PY{n}{numpy}\PY{o}{.}\PY{n}{array\PYZus{}equal}\PY{p}{(}\PY{n}{input\PYZus{}pattern}\PY{p}{[}\PY{n}{k}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{canvas}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{:}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{canvas}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{j}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{output\PYZus{}pattern}\PY{p}{[}\PY{n}{k}\PY{p}{]}
+        \PY{k+kn}{from} \PY{n+nn}{\PYZus{}\PYZus{}future\PYZus{}\PYZus{}} \PY{k}{import} \PY{n}{print\PYZus{}function}
+        \PY{k+kn}{from} \PY{n+nn}{ipywidgets} \PY{k}{import} \PY{n}{interact}\PY{p}{,} \PY{n}{interactive}\PY{p}{,} \PY{n}{fixed}\PY{p}{,} \PY{n}{interact\PYZus{}manual}
+        \PY{k+kn}{import} \PY{n+nn}{ipywidgets} \PY{k}{as} \PY{n+nn}{widgets}
+        
+        \PY{c+c1}{\PYZsh{}funkcija za kreiranje slike elementarnog staničnog automata}
+        
+        \PY{k}{def} \PY{n+nf}{f}\PY{p}{(}\PY{n}{number}\PY{p}{)}\PY{p}{:}
+            \PY{n}{output\PYZus{}pattern} \PY{o}{=} \PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{numpy}\PY{o}{.}\PY{n}{binary\PYZus{}repr}\PY{p}{(}\PY{n}{number}\PY{p}{,} \PY{n}{width}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{]}
+            \PY{n}{input\PYZus{}pattern} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{:}
+                \PY{n}{input\PYZus{}pattern}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{numpy}\PY{o}{.}\PY{n}{binary\PYZus{}repr}\PY{p}{(}\PY{l+m+mi}{7}\PY{o}{\PYZhy{}}\PY{n}{i}\PY{p}{,} \PY{n}{width}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{]}
+            \PY{n}{columns} \PY{o}{=} \PY{l+m+mi}{21}
+            \PY{n}{rows} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{columns}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}
+            \PY{n}{canvas} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{[}\PY{n}{rows}\PY{p}{,}\PY{n}{columns}\PY{o}{+}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+            \PY{n}{canvas}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{int}\PY{p}{(}\PY{n}{columns}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{=}\PY{l+m+mi}{1}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{numpy}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{rows}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n}{numpy}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{columns}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{:}
+                        \PY{k}{if} \PY{n}{numpy}\PY{o}{.}\PY{n}{array\PYZus{}equal}\PY{p}{(}\PY{n}{input\PYZus{}pattern}\PY{p}{[}\PY{n}{k}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{canvas}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{:}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                            \PY{n}{canvas}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{j}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{output\PYZus{}pattern}\PY{p}{[}\PY{n}{k}\PY{p}{]}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{canvas}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{:}\PY{n}{columns}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Greys}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{interpolation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nearest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Elementarni stanicni automat pravilo }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{number}\PY{p}{)}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+            
+        \PY{c+c1}{\PYZsh{}interact opcija pomoću koje se upravlja vrijednosti pravila                    }
+        \PY{n}{interact}\PY{p}{(}\PY{n}{f}\PY{p}{,} \PY{n}{number}\PY{o}{=}\PY{n}{widgets}\PY{o}{.}\PY{n}{IntSlider}\PY{p}{(}\PY{n+nb}{min}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{max}\PY{o}{=}\PY{l+m+mi}{255}\PY{p}{,}\PY{n}{step}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{value}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+  %   \begin{verbatim}
+% interactive(children=(IntSlider(value=10, description='number', max=255, min=1), Output()), _dom_classes=('widget-interact',))
+%     \end{verbatim}
+
+   
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}1}]:} <function \_\_main\_\_.f>
+\end{Verbatim}
+            
+    \section{Conway's Game of Life}\label{conways-game-of-life}
+
+Iako je ideja o staničnim automatima nastala u 50-im godinama 20.
+stoljeća, tek nakon objave američkog znanstvenog časopisa o Conwayovoj
+Igri Života dolazi do popularnosti celularnih automata. \textbf{"Igra
+Života"} je stanični automat kojeg je smislio britanski matematičar John
+Horton Conway. Conway razvija interes prema razvitku ove igre iz Von
+Neumannove ideje o hipotetskom stroju koji bi imao mogućnost kopiranja
+samog sebe. U Conwayovoj interpretaciji takvog sustava njegova evolucija
+se temelji na inicijalnom (početnom) stanju te se vremenom stvaraju
+uzorci u ovisnosti o par jednostavnih pravila. Platforma od \emph{"Game
+of Life"} je beskonačna ortogonalna mreža sastavljena od kvadratnih
+stanica od kojih svaka posjeduje jedno od 2 svojstva, jeli \emph{živa}
+ili \emph{mrtva}. Svaka stanica na temelju Mooreove susjednosti
+interaktira s 8 susjednih stanica te se sljedeće tranzicije događaju u
+određenim trenucima: 1. Svaka živa stanica s manje od dva živa susjeda
+umire zbog uzroka depopulacije. 2. Svaka živa stanica s dva ili tri živa
+susjeda nastavlja živjeti u idućoj generaciji. 3. Svaka živa stanica s
+više od tri živa susjeda umire zbog prepopulacije. 4. Svaka mrtva
+stanica s točno tri živa susjeda postaje živa zbog uzroka reprodukcije.
+
+\begin{figure}
+\centering
+\includegraphics{Game_of_life_pulsar.png}
+\caption{test}
+\end{figure}
+
+    Prvenstvena ideja Conwaya je bila definirati zanimljiv i ujedno
+nepredvidljiv stanični automat. Također, želio je dobiti konfiguracije
+koje bi trajale dugo vremena prije \emph{izumiranja} i konfiguracije
+koje bi trajale vječno bez ponovljenih ciklusa. Izabrao je pravila
+pažljivo i s mnogo eksprimentiranja došao do sljedećih kriterija: 1. Ne
+smije biti eksplozivnog rasta 2. Mora postojati jednostavni početni
+uzorak sa kaotičnim i nepredvidljivim ishodima 3. Mora postojati
+potencijal za von Neumannov univerzalni konstruktor 4. Pravila moraju
+biti jednostavno, pridržavajući se gore navedenih granica
+
+    Mnogo različitih uzoraka se pojavljuju u \emph{Igri Života} i
+klasificirani su s obzirom na svoje ponašanje. Nepomični uzorci su
+ujedno i oscilatori, samo što se s vremenom njihov uzorak ne mijenja već
+ostaje isti zbog pravila. Oscilatorov period definiramo kao broj
+promjena kroz kojih prolazi dok se ne vrati u početno stanje. To znači
+da kod nepomičnih uzoraka vrijedi da im je period 1. Najprirodniji
+oscilatori imaju period 2 dok npr. uzorak "Acorn" ima period od 5206.
+Najčešći uzorci su:
+
+
+\begin{center}
+\textbf{Nepomični} 
+\\[0.2cm]
+\includegraphics{11.png} 
+\\
+\textbf{Oscilatori (period
+2)}
+\\
+\includegraphics{1.png}
+\\
+\includegraphics{2.png}
+\\
+\includegraphics{3.png}
+\\
+\textbf{Spaceships} 
+\\
+\includegraphics{4.png}\includegraphics{5.png}
+\end{center}
+
+"Spaceships" su uzorci koji se vraćaju u početni oblik, ali se nalaze na
+drugačijoj poziciji. Također ima svoj period, ali i još jednu zanimljivu
+karakteristiku - brzinu. Brzina opisuje odnos između broja generacija
+potrebnih da se \emph{Spaceship} pojavi na novom mjestu i koliko je ta
+pozicija udaljena od prošle. Za brzinu $S$ vrijedi:
+
+$S = \frac{kc}{g}$ , gdje je $k$ broj ćelija koje \emph{Spaceship}
+prijeđe u $g$ generacija, $c$ je metaforička brzina svjetlosti (1 ćelija po
+generaciji)
+
+\textbf{Puffer vlak}
+
+Konačni uzorak koji se kreće kroz prostor pritom ostavljajući iza sebe
+"ostatke". 
+
+    \subsection{Iteracije}\label{iteracije}
+
+Iz nasumičnog početnog uzorka živih ćelija na mreži, promatraču je očito
+da se populacija konstantno mijenja kako generacije prolaze svakim
+trenutkom. Uzorci koji proizlaze iz jednostavnih pravila mogu se
+smatrati formom ljepote. Manji izolirani uzorci s inicijalnom
+asimetrijom teže ka postizanju simetrije. Jednom kad se to dogodi,
+simetrija može povećati svoje \emph{bogatstvo}, ali ne može nestati osim
+ako ju ne poremeti susjedni uzorak. Rijetkost je da s vremenom
+generacija potpuno nestane, odnosno da sve žive stanice izumru. Većina
+uzoraka gradijalno proizvede stabilne figure ili uzorke koji osciliraju
+(ostatci).
+
+    \subsection{Algoritmi}\label{algoritmi}
+
+Prvi rezultati \textbf{Igre Života} su prikupljeni bez korištenja
+računala. Najjednostavniji stacionarni životi i oscilatori su otkriveni
+koristeći manji broj početnih konfiguracija pomoću crtanja na papir ili
+pomoću figura iz društvenih igara (npr. japanska strateška igra "Go").
+
+Ova otkrića su potakla programere da napišu programske kodove s kojima
+bi mogli pratiti evoluciju Conwayovih života. U početku je većina
+algoritama bila slična, život je predstavljen kao dvodimenzionalna
+matrica u memoriji računala, a stanice su predstavljene nulama i
+jedinicama. U principu, polje života je beskonačno, ali računala imaju
+konačnu memoriju tako da veličina matrice u početku mora biti
+specificirana. To vodi do problema kada se aktivno područje proširi
+izvan granica matrice. Programeri su koristili nekolicinu strategija za
+rješavanje takvih problema. Osnovna strategija je bila pretpostaviti da
+svaka stanica izvan okvira je mrtva, no takva strategija je vodila do
+pogrešnih rezultata. Sofisticiranija strategija je lijevi i desni kraj
+matrice promatrati kao spojenu cjelinu, pri čemu bi stanica koja prijeđe
+s jednog kraja se ponovno pojavila, ali na drugom kraju. Još jedna
+strategija je tehnika dinamičkog alociranja memorije koja bi stvarala
+sve veće matrice koja pritom sadrži rastuće uzorke.
+
+Alternativno, programeri mogu napustiti opciju predstavljanja mreže
+života kao matricu i koristiti vektor s parovima koordinata koje bi
+predstavljale žive ćelije. Ovakav pristup sadrži manu u brojenju živih
+ćelija koja značajno smanjuje brzinu simulacije.
+
+Za istraživanje opsežnijih uzoraka kroz značajniji period, koristi se
+sofisticirani algoritam "Hashlife" u programskom alatu Golly.
+
+    \subsection{Igra Života u Pythonu}\label{igra-ux17eivota-u-pythonu}
+
+Primjer Igre Života s mogućih 5 startnih opcija : - nasumično generiran
+život - Rpentomino - Acorn - DieHard - GliderGun
+
+Za odabrati prikaz željene opcije potrebno je odkomentirati poziv
+funkcije unutar main(). Početna postavka je nasumično generiran život.
+Igra je kreirana pomoću pygame modula koji otvara python igru u novom
+prozoru na računalu. Za napraviti željeni uzorak koji nije među početnim
+opcijama potrebno je napraviti funkciju: def
+\{ime\_funckije\}(lifeDict): te unutar funkcije poziva se matrica
+lifeDict u kojoj se željena polja (koordinate) označe kao žive,
+inicijalizirajući ih kao broj 1.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k+kn}{import} \PY{n+nn}{pygame}\PY{o}{,} \PY{n+nn}{sys}
+        \PY{k+kn}{from} \PY{n+nn}{pygame}\PY{n+nn}{.}\PY{n+nn}{locals} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{import} \PY{n+nn}{time}
+        \PY{k+kn}{import} \PY{n+nn}{random}
+        
+        \PY{n}{FPS} \PY{o}{=} \PY{l+m+mi}{30}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}Postavke veličine prozora}
+        \PY{n}{WINDOWWIDTH} \PY{o}{=} \PY{l+m+mi}{640}
+        \PY{n}{WINDOWHEIGHT} \PY{o}{=} \PY{l+m+mi}{450}
+        \PY{n}{CELLSIZE} \PY{o}{=} \PY{l+m+mi}{5}
+        \PY{k}{assert} \PY{n}{WINDOWWIDTH} \PY{o}{\PYZpc{}} \PY{n}{CELLSIZE} \PY{o}{==} \PY{l+m+mi}{0} 
+        \PY{k}{assert} \PY{n}{WINDOWHEIGHT} \PY{o}{\PYZpc{}} \PY{n}{CELLSIZE} \PY{o}{==} \PY{l+m+mi}{0} 
+        \PY{n}{CELLWIDTH} \PY{o}{=} \PY{n}{WINDOWWIDTH} \PY{o}{/} \PY{n}{CELLSIZE} \PY{c+c1}{\PYZsh{} broj ćelija}
+        \PY{n}{CELLHEIGHT} \PY{o}{=} \PY{n}{WINDOWHEIGHT} \PY{o}{/} \PY{n}{CELLSIZE} 
+        
+        \PY{c+c1}{\PYZsh{} boje}
+        \PY{n}{BLACK} \PY{o}{=}    \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}  \PY{l+m+mi}{0}\PY{p}{,}  \PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{WHITE} \PY{o}{=}    \PY{p}{(}\PY{l+m+mi}{255}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{)}
+        \PY{n}{DARKGRAY} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{40}\PY{p}{,} \PY{l+m+mi}{40}\PY{p}{,} \PY{l+m+mi}{40}\PY{p}{)}
+        \PY{n}{GREEN} \PY{o}{=}    \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}Crtanje linije od mreže}
+        \PY{k}{def} \PY{n+nf}{drawGrid}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{WINDOWWIDTH}\PY{p}{,} \PY{n}{CELLSIZE}\PY{p}{)}\PY{p}{:} 
+                \PY{n}{pygame}\PY{o}{.}\PY{n}{draw}\PY{o}{.}\PY{n}{line}\PY{p}{(}\PY{n}{DISPLAYSURF}\PY{p}{,} \PY{n}{DARKGRAY}\PY{p}{,} \PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{WINDOWHEIGHT}\PY{p}{)}\PY{p}{)}
+            \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{WINDOWHEIGHT}\PY{p}{,} \PY{n}{CELLSIZE}\PY{p}{)}\PY{p}{:} 
+                \PY{n}{pygame}\PY{o}{.}\PY{n}{draw}\PY{o}{.}\PY{n}{line}\PY{p}{(}\PY{n}{DISPLAYSURF}\PY{p}{,} \PY{n}{DARKGRAY}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n}{WINDOWWIDTH}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}bojanje mreže}
+        \PY{k}{def} \PY{n+nf}{colourGrid}\PY{p}{(}\PY{n}{item}\PY{p}{,} \PY{n}{lifeDict}\PY{p}{)}\PY{p}{:}
+            \PY{n}{x} \PY{o}{=} \PY{n}{item}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{n}{y} \PY{o}{=} \PY{n}{item} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+            \PY{k}{if} \PY{n}{lifeDict}\PY{p}{[}\PY{n}{item}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                \PY{n}{y} \PY{o}{=} \PY{n}{y} \PY{o}{*} \PY{n}{CELLSIZE} 
+                \PY{n}{x} \PY{o}{=} \PY{n}{x} \PY{o}{*} \PY{n}{CELLSIZE} 
+                \PY{n}{pygame}\PY{o}{.}\PY{n}{draw}\PY{o}{.}\PY{n}{rect}\PY{p}{(}\PY{n}{DISPLAYSURF}\PY{p}{,} \PY{n}{WHITE}\PY{p}{,} \PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{CELLSIZE}\PY{p}{,} \PY{n}{CELLSIZE}\PY{p}{)}\PY{p}{)}
+            \PY{k}{if} \PY{n}{lifeDict}\PY{p}{[}\PY{n}{item}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+                \PY{n}{y} \PY{o}{=} \PY{n}{y} \PY{o}{*} \PY{n}{CELLSIZE} 
+                \PY{n}{x} \PY{o}{=} \PY{n}{x} \PY{o}{*} \PY{n}{CELLSIZE} 
+                \PY{n}{pygame}\PY{o}{.}\PY{n}{draw}\PY{o}{.}\PY{n}{rect}\PY{p}{(}\PY{n}{DISPLAYSURF}\PY{p}{,} \PY{n}{BLACK}\PY{p}{,} \PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{CELLSIZE}\PY{p}{,} \PY{n}{CELLSIZE}\PY{p}{)}\PY{p}{)}
+            \PY{k}{return} \PY{k+kc}{None}
+        \PY{c+c1}{\PYZsh{}prazna mreža}
+        \PY{k}{def} \PY{n+nf}{blankGrid}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n}{gridDict} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+            \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{CELLHEIGHT}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{CELLWIDTH}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{gridDict}\PY{p}{[}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{k}{return} \PY{n}{gridDict}
+        
+        \PY{c+c1}{\PYZsh{}deklaracija početnih opcija}
+        
+        \PY{k}{def} \PY{n+nf}{startingGridRandom}\PY{p}{(}\PY{n}{lifeDict}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{lifeDict}\PY{p}{:}
+                \PY{n}{lifeDict}\PY{p}{[}\PY{n}{item}\PY{p}{]} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{k}{return} \PY{n}{lifeDict}
+        
+        \PY{k}{def} \PY{n+nf}{startingRpentomino}\PY{p}{(}\PY{n}{lifeDict}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}R\PYZhy{}pentomino}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{48}\PY{p}{,}\PY{l+m+mi}{32}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{49}\PY{p}{,}\PY{l+m+mi}{32}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{47}\PY{p}{,}\PY{l+m+mi}{33}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{48}\PY{p}{,}\PY{l+m+mi}{33}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{48}\PY{p}{,}\PY{l+m+mi}{34}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{k}{return} \PY{n}{lifeDict}
+        
+        
+        \PY{k}{def} \PY{n+nf}{startingAcorn}\PY{p}{(}\PY{n}{lifeDict}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}Acorn}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{105}\PY{p}{,}\PY{l+m+mi}{55}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{106}\PY{p}{,}\PY{l+m+mi}{55}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{109}\PY{p}{,}\PY{l+m+mi}{55}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{110}\PY{p}{,}\PY{l+m+mi}{55}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{111}\PY{p}{,}\PY{l+m+mi}{55}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{106}\PY{p}{,}\PY{l+m+mi}{53}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{108}\PY{p}{,}\PY{l+m+mi}{54}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{k}{return} \PY{n}{lifeDict}
+        
+        \PY{k}{def} \PY{n+nf}{startingDiehard}\PY{p}{(}\PY{n}{lifeDict}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}Diehard}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{45}\PY{p}{,}\PY{l+m+mi}{45}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{46}\PY{p}{,}\PY{l+m+mi}{45}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{46}\PY{p}{,}\PY{l+m+mi}{46}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{46}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{51}\PY{p}{,}\PY{l+m+mi}{46}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{52}\PY{p}{,}\PY{l+m+mi}{46}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{51}\PY{p}{,}\PY{l+m+mi}{44}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{k}{return} \PY{n}{lifeDict}
+        
+        \PY{k}{def} \PY{n+nf}{startingGosperGliderGun}\PY{p}{(}\PY{n}{lifeDict}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}Gosper Glider Gun}
+            
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{17}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{18}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{17}\PY{p}{,}\PY{l+m+mi}{13}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{18}\PY{p}{,}\PY{l+m+mi}{13}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{17}\PY{p}{,}\PY{l+m+mi}{19}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{18}\PY{p}{,}\PY{l+m+mi}{19}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{19}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{18}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{21}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{21}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{21}\PY{p}{,}\PY{l+m+mi}{17}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{22}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{25}\PY{p}{,}\PY{l+m+mi}{13}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{25}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{25}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{26}\PY{p}{,}\PY{l+m+mi}{13}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{26}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{26}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{27}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{27}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{29}\PY{p}{,}\PY{l+m+mi}{11}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{29}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{29}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{29}\PY{p}{,}\PY{l+m+mi}{17}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{39}\PY{p}{,}\PY{l+m+mi}{13}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{39}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{40}\PY{p}{,}\PY{l+m+mi}{13}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{lifeDict}\PY{p}{[}\PY{l+m+mi}{40}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{k}{return} \PY{n}{lifeDict}
+            
+        \PY{k}{def} \PY{n+nf}{getNeighbours}\PY{p}{(}\PY{n}{item}\PY{p}{,}\PY{n}{lifeDict}\PY{p}{)}\PY{p}{:}
+            \PY{n}{neighbours} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+                \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{checkCell} \PY{o}{=} \PY{p}{(}\PY{n}{item}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{n}{x}\PY{p}{,}\PY{n}{item}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+}\PY{n}{y}\PY{p}{)}
+                    \PY{k}{if} \PY{n}{checkCell}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{CELLWIDTH}  \PY{o+ow}{and} \PY{n}{checkCell}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{:}
+                        \PY{k}{if} \PY{n}{checkCell} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{CELLHEIGHT} \PY{o+ow}{and} \PY{n}{checkCell}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{0}\PY{p}{:}
+                            \PY{k}{if} \PY{n}{lifeDict}\PY{p}{[}\PY{n}{checkCell}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+                                \PY{k}{if} \PY{n}{x} \PY{o}{==} \PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{y} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:} 
+                                    \PY{n}{neighbours} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{0}
+                                \PY{k}{else}\PY{p}{:}
+                                    \PY{n}{neighbours} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+            \PY{k}{return} \PY{n}{neighbours}
+        
+        \PY{k}{def} \PY{n+nf}{tick}\PY{p}{(}\PY{n}{lifeDict}\PY{p}{)}\PY{p}{:}
+            \PY{n}{newTick} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+            \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{lifeDict}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{}broj susjeda}
+                \PY{n}{numberNeighbours} \PY{o}{=} \PY{n}{getNeighbours}\PY{p}{(}\PY{n}{item}\PY{p}{,} \PY{n}{lifeDict}\PY{p}{)}
+                \PY{k}{if} \PY{n}{lifeDict}\PY{p}{[}\PY{n}{item}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:} \PY{c+c1}{\PYZsh{} za one koje su vec zive}
+                    \PY{k}{if} \PY{n}{numberNeighbours} \PY{o}{\PYZlt{}} \PY{l+m+mi}{2}\PY{p}{:} \PY{c+c1}{\PYZsh{} ubij depopulaciju}
+                        \PY{n}{newTick}\PY{p}{[}\PY{n}{item}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+                    \PY{k}{elif} \PY{n}{numberNeighbours} \PY{o}{\PYZgt{}} \PY{l+m+mi}{3}\PY{p}{:} \PY{c+c1}{\PYZsh{} ubij prepopulaciju}
+                        \PY{n}{newTick}\PY{p}{[}\PY{n}{item}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+                    \PY{k}{else}\PY{p}{:}
+                        \PY{n}{newTick}\PY{p}{[}\PY{n}{item}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1} \PY{c+c1}{\PYZsh{} status quo}
+                \PY{k}{elif} \PY{n}{lifeDict}\PY{p}{[}\PY{n}{item}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{k}{if} \PY{n}{numberNeighbours} \PY{o}{==} \PY{l+m+mi}{3}\PY{p}{:} \PY{c+c1}{\PYZsh{} stanica se dijeli}
+                        \PY{n}{newTick}\PY{p}{[}\PY{n}{item}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+                    \PY{k}{else}\PY{p}{:}
+                        \PY{n}{newTick}\PY{p}{[}\PY{n}{item}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0} \PY{c+c1}{\PYZsh{} status quo}
+            \PY{k}{return} \PY{n}{newTick}
+        
+        \PY{k}{def} \PY{n+nf}{main}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n}{pygame}\PY{o}{.}\PY{n}{init}\PY{p}{(}\PY{p}{)}
+            \PY{k}{global} \PY{n}{DISPLAYSURF}
+            \PY{n}{FPSCLOCK} \PY{o}{=} \PY{n}{pygame}\PY{o}{.}\PY{n}{time}\PY{o}{.}\PY{n}{Clock}\PY{p}{(}\PY{p}{)}
+            \PY{n}{DISPLAYSURF} \PY{o}{=} \PY{n}{pygame}\PY{o}{.}\PY{n}{display}\PY{o}{.}\PY{n}{set\PYZus{}mode}\PY{p}{(}\PY{p}{(}\PY{n}{WINDOWWIDTH}\PY{p}{,}\PY{n}{WINDOWHEIGHT}\PY{p}{)}\PY{p}{)}
+            \PY{n}{pygame}\PY{o}{.}\PY{n}{display}\PY{o}{.}\PY{n}{set\PYZus{}caption}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Igra Života}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+            \PY{n}{DISPLAYSURF}\PY{o}{.}\PY{n}{fill}\PY{p}{(}\PY{n}{WHITE}\PY{p}{)}
+        
+            \PY{n}{lifeDict} \PY{o}{=} \PY{n}{blankGrid}\PY{p}{(}\PY{p}{)} 
+        
+            \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}Starting options}
+            \PY{n}{lifeDict} \PY{o}{=} \PY{n}{startingGridRandom}\PY{p}{(}\PY{n}{lifeDict}\PY{p}{)} \PY{c+c1}{\PYZsh{}  random zivot}
+            \PY{c+c1}{\PYZsh{}lifeDict = startingRpentomino(lifeDict) \PYZsh{}  R\PYZhy{}pentomino}
+            \PY{c+c1}{\PYZsh{}lifeDict = startingAcorn(lifeDict) \PYZsh{}  Acorn}
+            \PY{c+c1}{\PYZsh{}lifeDict = startingDiehard(lifeDict) \PYZsh{}DieHard}
+            \PY{c+c1}{\PYZsh{}lifeDict = startingGosperGliderGun(lifeDict) \PYZsh{}GliderGun}
+        
+            \PY{c+c1}{\PYZsh{}oboji zive ćelije}
+            \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{lifeDict}\PY{p}{:}
+                \PY{n}{colourGrid}\PY{p}{(}\PY{n}{item}\PY{p}{,} \PY{n}{lifeDict}\PY{p}{)}
+        
+            \PY{n}{drawGrid}\PY{p}{(}\PY{p}{)}
+            \PY{n}{pygame}\PY{o}{.}\PY{n}{display}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{p}{)}
+                
+            \PY{k}{while} \PY{k+kc}{True}\PY{p}{:} 
+                \PY{k}{for} \PY{n}{event} \PY{o+ow}{in} \PY{n}{pygame}\PY{o}{.}\PY{n}{event}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{if} \PY{n}{event}\PY{o}{.}\PY{n}{type} \PY{o}{==} \PY{n}{QUIT}\PY{p}{:}
+                        \PY{n}{pygame}\PY{o}{.}\PY{n}{quit}\PY{p}{(}\PY{p}{)}
+                        \PY{n}{sys}\PY{o}{.}\PY{n}{exit}\PY{p}{(}\PY{p}{)}
+        
+                
+                \PY{n}{lifeDict} \PY{o}{=} \PY{n}{tick}\PY{p}{(}\PY{n}{lifeDict}\PY{p}{)}
+        
+                
+                \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{lifeDict}\PY{p}{:}
+                    \PY{n}{colourGrid}\PY{p}{(}\PY{n}{item}\PY{p}{,} \PY{n}{lifeDict}\PY{p}{)}
+        
+                \PY{n}{drawGrid}\PY{p}{(}\PY{p}{)}
+                \PY{n}{pygame}\PY{o}{.}\PY{n}{display}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{p}{)}    
+                \PY{n}{FPSCLOCK}\PY{o}{.}\PY{n}{tick}\PY{p}{(}\PY{n}{FPS}\PY{p}{)}
+        \PY{k}{if} \PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}\PYZus{}main\PYZus{}\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+            \PY{n}{main}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+
+
+
+    \subsection{Igra Života u Jupyter
+okruženju}\label{igra-ux17eivota-u-jupyter-okruux17eenju}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         
+         \PY{k}{def} \PY{n+nf}{life\PYZus{}step\PYZus{}1}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}korak igre života koristeći \PYZsq{}Geneator expressions\PYZsq{} python jezika\PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{nbrs\PYZus{}count} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{roll}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{roll}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{i}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{n}{j}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+                              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)} \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+                              \PY{k}{if} \PY{p}{(}\PY{n}{i} \PY{o}{!=} \PY{l+m+mi}{0} \PY{o+ow}{or} \PY{n}{j} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{p}{(}\PY{n}{nbrs\PYZus{}count} \PY{o}{==} \PY{l+m+mi}{3}\PY{p}{)} \PY{o}{|} \PY{p}{(}\PY{n}{X} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{nbrs\PYZus{}count} \PY{o}{==} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+         
+         
+         \PY{n}{life\PYZus{}step} \PY{o}{=} \PY{n}{life\PYZus{}step\PYZus{}1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{o}{\PYZpc{}}\PY{k}{pylab} inline
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Populating the interactive namespace from numpy and matplotlib
+
+    \end{Verbatim}
+
+  
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{cd} \PY{n}{C}\PY{p}{:}\PY{o}{/}\PY{n}{Users}\PY{o}{/}\PY{n}{Vuksa}\PY{o}{/}\PY{n}{Desktop}\PY{o}{/}\PY{n}{JSAnimation}\PY{o}{\PYZhy{}}\PY{n}{master}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}Vuksa\textbackslash{}Desktop\textbackslash{}JSAnimation-master
+
+    \end{Verbatim}
+
+    Za pravilno izvođenje koda, potrebno je prethodno preuzeti JSAnimation
+skriptu sa https://github.com/jakevdp/JSAnimation . U Linux okruženju
+dovoljno je u terminal upisati git clone
+https://github.com/\textasciitilde{}, a u Windows okruženju potrebno je
+preuzeti .zip datoteku, te raspakirati dokument u direktorij izvođenja
+bilježnice. JSAnimation skripta pruža mogućnost pregleda željene
+generacije za zadani uzorak. Namještanjem varijable frames mijenjamo
+broj prikazanih generacija i u bilo kojem trenutku je moguće pauzirati
+animaciju i vidjeti kako u tom trenutku izgleda Conwayov život.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{k+kn}{from} \PY{n+nn}{JSAnimation}\PY{n+nn}{.}\PY{n+nn}{IPython\PYZus{}display} \PY{k}{import} \PY{n}{display\PYZus{}animation}\PY{p}{,} \PY{n}{anim\PYZus{}to\PYZus{}html}
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{animation}
+         \PY{k+kn}{import} \PY{n+nn}{ipywidgets} \PY{k}{as} \PY{n+nn}{widgets}
+         
+         \PY{k}{def} \PY{n+nf}{life\PYZus{}animation}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{frames}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{interval}\PY{o}{=}\PY{l+m+mi}{300}\PY{p}{,} \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loop}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Stvori Game of Life animaciju}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Parameteri}
+         \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{l+s+sd}{    X : dvodimenzionalna matrica}
+         \PY{l+s+sd}{    dpi : integer, dots per inch, veličina stanica}
+         \PY{l+s+sd}{        }
+         \PY{l+s+sd}{        }
+         \PY{l+s+sd}{    frames : integer}
+         \PY{l+s+sd}{        sličice po sekundi}
+         \PY{l+s+sd}{    interval : float}
+         \PY{l+s+sd}{        vremenski interval između sličica}
+         \PY{l+s+sd}{    mode : string}
+         \PY{l+s+sd}{         Opcije su [\PYZsq{}loop\PYZsq{}|\PYZsq{}once\PYZsq{}|\PYZsq{}reflect\PYZsq{}]}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{k}{assert} \PY{n}{X}\PY{o}{.}\PY{n}{ndim} \PY{o}{==} \PY{l+m+mi}{2}
+             \PY{n}{X} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{bool}\PY{p}{)}
+             
+             \PY{n}{X\PYZus{}blank} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros\PYZus{}like}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{*} \PY{l+m+mf}{1.} \PY{o}{/} \PY{n}{dpi}\PY{p}{,} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{l+m+mf}{1.} \PY{o}{/} \PY{n}{dpi}\PY{p}{)}
+         
+             \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{n}{dpi}\PY{p}{)}
+             \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{xticks}\PY{o}{=}\PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{n}{yticks}\PY{o}{=}\PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{n}{frameon}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+             \PY{n}{im} \PY{o}{=} \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{binary}\PY{p}{,} \PY{n}{interpolation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nearest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{im}\PY{o}{.}\PY{n}{set\PYZus{}clim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Postavljanje sive pozadine}
+         
+             \PY{c+c1}{\PYZsh{} inicijalizacijska funkcija}
+             \PY{k}{def} \PY{n+nf}{init}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{im}\PY{o}{.}\PY{n}{set\PYZus{}data}\PY{p}{(}\PY{n}{X\PYZus{}blank}\PY{p}{)}
+                 \PY{k}{return} \PY{p}{(}\PY{n}{im}\PY{p}{,}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} animacijska funkcija}
+             \PY{k}{def} \PY{n+nf}{animate}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{im}\PY{o}{.}\PY{n}{set\PYZus{}data}\PY{p}{(}\PY{n}{animate}\PY{o}{.}\PY{n}{X}\PY{p}{)}
+                 \PY{n}{animate}\PY{o}{.}\PY{n}{X} \PY{o}{=} \PY{n}{life\PYZus{}step}\PY{p}{(}\PY{n}{animate}\PY{o}{.}\PY{n}{X}\PY{p}{)}
+                 \PY{k}{return} \PY{p}{(}\PY{n}{im}\PY{p}{,}\PY{p}{)}
+             \PY{n}{animate}\PY{o}{.}\PY{n}{X} \PY{o}{=} \PY{n}{X}
+         
+             \PY{n}{anim} \PY{o}{=} \PY{n}{animation}\PY{o}{.}\PY{n}{FuncAnimation}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{n}{animate}\PY{p}{,} \PY{n}{init\PYZus{}func}\PY{o}{=}\PY{n}{init}\PY{p}{,}
+                                            \PY{n}{frames}\PY{o}{=}\PY{n}{frames}\PY{p}{,} \PY{n}{interval}\PY{o}{=}\PY{n}{interval}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}print anim\PYZus{}to\PYZus{}html(anim)}
+             \PY{k}{return} \PY{n}{display\PYZus{}animation}\PY{p}{(}\PY{n}{anim}\PY{p}{,} \PY{n}{default\PYZus{}mode}\PY{o}{=}\PY{n}{mode}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{17}\PY{p}{,} \PY{l+m+mi}{17}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}postavljanje matrice 17x17 ispunjenu nulama}
+         \PY{c+c1}{\PYZsh{}postavljanje željenih stanica kao živih postavljajući ih u 1.}
+         \PY{n}{X}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{:}\PY{l+m+mi}{7}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1} 
+         \PY{n}{X}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{:}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{c+c1}{\PYZsh{}dodaje se transponirana matrica zbog dodavanja dodatnih simetričnih uzoraka}
+         \PY{n}{X} \PY{o}{+}\PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{T}
+         \PY{n}{X} \PY{o}{+}\PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{X} \PY{o}{+}\PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{p}{:}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}poziv funkcije}
+         \PY{n}{life\PYZus{}animation}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{frames}\PY{o}{=}\PY{l+m+mi}{12}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}41}]:} <IPython.core.display.HTML object>
+\end{Verbatim}
+            
+    Primjer oscilirajućih uzoraka (period 2)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{c+c1}{\PYZsh{}blinker je sastavljen od 3 susjedne žive ćelije }
+         \PY{c+c1}{\PYZsh{}gdje središnja ostaje stacionarna, uzorak ide iz horizontalnog u vertikalni polozaj}
+         \PY{n}{blinker} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}toad je desni uzorak na slici i u principu je dvostruki oscilirajuci blinker}
+         \PY{n}{toad} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                 \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}
+         
+         \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{)}\PY{p}{)}
+         \PY{n}{X}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{=} \PY{n}{blinker}
+         \PY{n}{X}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]} \PY{o}{=} \PY{n}{toad}
+         \PY{n}{life\PYZus{}animation}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{25}\PY{p}{,} \PY{n}{frames}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}43}]:} <IPython.core.display.HTML object>
+\end{Verbatim}
+            
+    Primjer statičnih konfiguracija:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{21}\PY{p}{)}\PY{p}{)}
+         \PY{n}{X}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n}{X}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{:}\PY{l+m+mi}{9}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                        \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                        \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}
+         \PY{n}{X}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{:}\PY{l+m+mi}{15}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                          \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                          \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                          \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}
+         \PY{n}{X}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{17}\PY{p}{:}\PY{l+m+mi}{20}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                          \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                          \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}
+         
+         \PY{n}{life\PYZus{}animation}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{12}\PY{p}{,} \PY{n}{frames}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}44}]:} <IPython.core.display.HTML object>
+\end{Verbatim}
+            
+    \section{Model staničnog automata u
+prirodi}\label{model-staniux10dnog-automata-u-prirodi}
+
+Osim što je osnova modernog računala, Turingov konceptualni automat
+također pruža koristan uvid u svijet organizama. Jednako kao što automat
+ovisi o raznim ulazima i na izlaz prikazuje na temelju trenutnog stanja
+i programa, tako i organizam ovisi o vanjskom svijetu, i ponaša se u
+skladu trenutnog raspoloženja i prirode. Stanični automat produbljuje
+ovu analogiju u smislu da pruža pregled populacija koji međusobno
+interaktiraju. Koristeći prihvatljiva pravila u stanični automat, moguće
+je simulirati bilo koje kompleksno ponašanje, od kretanja fluida sve do
+razvoja morskih zvijezda na koraljnom grebenu.
+
+Kod koji predstavlja kretnju, razmnožavanje i umiranje bizona s obzirom
+na proizvoljno zadanu vjerojatnost rođenja i smrti:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         
+         \PY{k}{def} \PY{n+nf}{uni\PYZus{}rand}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Daje nasumičan broj, \PYZhy{}1 ili 1.}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{pdf} \PY{o}{=} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
+             \PY{k}{return} \PY{n}{pdf}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{]}
+         
+         \PY{k}{def} \PY{n+nf}{random\PYZus{}adj\PYZus{}square}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Ova funkcija vraća matricu za simuliranje kretnje bizona na nasumičnu}
+         \PY{l+s+sd}{    susjednu stanicu.}
+         \PY{l+s+sd}{    Pravila:}
+         \PY{l+s+sd}{      \PYZhy{} Ako je nasumično odabrana susjedna stanica zauzeta,}
+         \PY{l+s+sd}{      bizon ostaje na mjestu    }
+         \PY{l+s+sd}{      \PYZhy{} Ako je susjedna stanica slobodna, bizon prelazi u nju}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{n}\PY{p}{,}\PY{n}{m} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{shape}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{m}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]}\PY{p}{:}
+                         \PY{n}{idx} \PY{o}{=} \PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{n}{uni\PYZus{}rand}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{j}\PY{o}{+}\PY{n}{uni\PYZus{}rand}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+                         \PY{k}{if} \PY{n}{idx}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{p}{(}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                             \PY{n}{idx}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{idx}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{n}\PY{p}{)}
+                         \PY{k}{if} \PY{n}{idx}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{p}{(}\PY{n}{m}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                             \PY{n}{idx}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{idx}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{m}\PY{p}{)}
+                         \PY{k}{if} \PY{o+ow}{not} \PY{n}{X}\PY{p}{[}\PY{n}{idx}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{idx}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{:}
+                             \PY{n}{X}\PY{p}{[}\PY{n}{idx}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{idx}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{k+kc}{True}
+                             \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{k+kc}{False}
+             \PY{k}{return} \PY{n}{X}
+         
+         \PY{k}{def} \PY{n+nf}{death}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{death\PYZus{}prob}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Smrt bizona}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{n}\PY{p}{,}\PY{n}{m} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{shape}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{m}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]}\PY{p}{:}
+                         \PY{c+c1}{\PYZsh{}ubij bizona s obirom na smrtnu stopu}
+                         \PY{k}{if} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n}{death\PYZus{}prob}\PY{p}{:}
+                             \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{k+kc}{False}
+             \PY{k}{return} \PY{n}{X}
+         
+         \PY{k}{def} \PY{n+nf}{birth}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{birth\PYZus{}prob}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    rađanje bizona:}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Prvo, vrati matricu nasumičnih susjednih stanica}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Zatim pridijeli nasumičan broj svakom elementu koji je postavljen kao True}
+         \PY{l+s+sd}{    u matrici iz prvog koraka.}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Zatim, taj broj ptretvori u bool vrijednost baziranu na vjerojatnošću}
+         \PY{l+s+sd}{    stope rađanja}
+         
+         \PY{l+s+sd}{    Zatim vrati bool matrice spojene skupa.}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{Y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{n}{X}\PY{p}{)} 
+             \PY{n}{Y} \PY{o}{=} \PY{n}{random\PYZus{}adj\PYZus{}square}\PY{p}{(}\PY{n}{Y}\PY{p}{)} \PY{c+c1}{\PYZsh{}Prvi korak}
+             \PY{c+c1}{\PYZsh{}Ako je stanica u toj matrici true, postavi nasumican broj }
+             \PY{c+c1}{\PYZsh{}izmedu 0 i 1 u celiju}
+             
+             \PY{n}{rand\PYZus{}num\PYZus{}mat} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{multiply}\PY{p}{(}\PY{n}{Y}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{shape}\PY{p}{(}\PY{n}{Y}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}ako ta ćelija ima vrijednost veću od neke zadane, postavi u true}
+             \PY{n}{bool\PYZus{}mat} \PY{o}{=} \PY{n}{rand\PYZus{}num\PYZus{}mat}\PY{o}{\PYZgt{}}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{birth\PYZus{}prob}\PY{p}{)}    
+             
+             \PY{c+c1}{\PYZsh{}ako su Y\PYZam{}bool\PYZus{}mat za svaku ćeliju jednake True, tada kreiraj matricu }
+             \PY{c+c1}{\PYZsh{}čije su ćelije isto True}
+             \PY{c+c1}{\PYZsh{}ako je jedna True, a druga False, tada kreiraj ćeliju u matrici sa False}
+             
+             
+             \PY{c+c1}{\PYZsh{}X | ... znači za svaku ćeliju, ako je ijedna True, vrati True }
+             \PY{k}{return} \PY{n}{X} \PY{o}{|} \PY{p}{(}\PY{n}{Y} \PY{o}{\PYZam{}} \PY{n}{bool\PYZus{}mat}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{life\PYZus{}random\PYZus{}walk}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{birth\PYZus{}prob}\PY{p}{,} \PY{n}{death\PYZus{}prob}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    A bison experiences life...}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{X} \PY{o}{=} \PY{n}{random\PYZus{}adj\PYZus{}square}\PY{p}{(}\PY{n}{X}\PY{p}{)} \PY{c+c1}{\PYZsh{}makni bizona na random ćeliju}
+             \PY{n}{X} \PY{o}{=} \PY{n}{death}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{death\PYZus{}prob}\PY{p}{)} \PY{c+c1}{\PYZsh{}u ovoj generaciji, ubij bizone}
+             \PY{n}{X} \PY{o}{=} \PY{n}{birth}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{birth\PYZus{}prob}\PY{p}{)} \PY{c+c1}{\PYZsh{}u ovoj generaciji, stvori bizone}
+         
+             \PY{k}{return} \PY{n}{X}
+             
+         \PY{n}{life\PYZus{}step} \PY{o}{=} \PY{n}{life\PYZus{}random\PYZus{}walk}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{o}{\PYZpc{}}\PY{k}{pylab} inline
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Populating the interactive namespace from numpy and matplotlib
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} JSAnimation import dostupno na https://github.com/jakevdp/JSAnimation}
+         \PY{k+kn}{from} \PY{n+nn}{JSAnimation}\PY{n+nn}{.}\PY{n+nn}{IPython\PYZus{}display} \PY{k}{import} \PY{n}{display\PYZus{}animation}\PY{p}{,} \PY{n}{anim\PYZus{}to\PYZus{}html}
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{animation}
+         
+         \PY{k}{def} \PY{n+nf}{life\PYZus{}animation}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{birth\PYZus{}rate}\PY{p}{,} \PY{n}{death\PYZus{}rate}\PY{p}{,} 
+                            \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{frames}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{interval}\PY{o}{=}\PY{l+m+mi}{300}\PY{p}{,} \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loop}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Stvori Game of Life animaciju}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Parameteri}
+         \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{l+s+sd}{    X : dvodimenzionalna matrica}
+         \PY{l+s+sd}{    dpi : integer, dots per inch, veličina stanica}
+         \PY{l+s+sd}{        }
+         \PY{l+s+sd}{        }
+         \PY{l+s+sd}{    frames : integer}
+         \PY{l+s+sd}{        sličice po sekundi}
+         \PY{l+s+sd}{    interval : float}
+         \PY{l+s+sd}{        vremenski interval između sličica}
+         \PY{l+s+sd}{    mode : string}
+         \PY{l+s+sd}{         Opcije su [\PYZsq{}loop\PYZsq{}|\PYZsq{}once\PYZsq{}|\PYZsq{}reflect\PYZsq{}]}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{k}{assert} \PY{n}{X}\PY{o}{.}\PY{n}{ndim} \PY{o}{==} \PY{l+m+mi}{2}
+             \PY{n}{X} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{bool}\PY{p}{)}
+             
+             \PY{n}{X\PYZus{}blank} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros\PYZus{}like}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{*} \PY{l+m+mf}{1.} \PY{o}{/} \PY{n}{dpi}\PY{p}{,} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{l+m+mf}{1.} \PY{o}{/} \PY{n}{dpi}\PY{p}{)}
+         
+             \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{n}{dpi}\PY{p}{)}
+             \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{xticks}\PY{o}{=}\PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{n}{yticks}\PY{o}{=}\PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{n}{frameon}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+             \PY{n}{im} \PY{o}{=} \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{binary}\PY{p}{,} \PY{n}{interpolation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nearest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{im}\PY{o}{.}\PY{n}{set\PYZus{}clim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}  \PY{c+c1}{\PYZsh{} napravi pozadinu sivom}
+         
+             \PY{c+c1}{\PYZsh{} inicijalizacijska funkcija: nacrtaj pozadinu od svake sličice}
+             \PY{k}{def} \PY{n+nf}{init}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{im}\PY{o}{.}\PY{n}{set\PYZus{}data}\PY{p}{(}\PY{n}{X\PYZus{}blank}\PY{p}{)}
+                 \PY{k}{return} \PY{p}{(}\PY{n}{im}\PY{p}{,}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} animacijska funkcija}
+             \PY{k}{def} \PY{n+nf}{animate}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{im}\PY{o}{.}\PY{n}{set\PYZus{}data}\PY{p}{(}\PY{n}{animate}\PY{o}{.}\PY{n}{X}\PY{p}{)}
+                 \PY{n}{animate}\PY{o}{.}\PY{n}{X} \PY{o}{=} \PY{n}{life\PYZus{}step}\PY{p}{(}\PY{n}{animate}\PY{o}{.}\PY{n}{X}\PY{p}{,} \PY{n}{birth\PYZus{}rate}\PY{p}{,} \PY{n}{death\PYZus{}rate}\PY{p}{)}
+                 \PY{k}{return} \PY{p}{(}\PY{n}{im}\PY{p}{,}\PY{p}{)}
+             \PY{n}{animate}\PY{o}{.}\PY{n}{X} \PY{o}{=} \PY{n}{X}
+         
+             \PY{n}{anim} \PY{o}{=} \PY{n}{animation}\PY{o}{.}\PY{n}{FuncAnimation}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{n}{animate}\PY{p}{,} \PY{n}{init\PYZus{}func}\PY{o}{=}\PY{n}{init}\PY{p}{,}
+                                            \PY{n}{frames}\PY{o}{=}\PY{n}{frames}\PY{p}{,} \PY{n}{interval}\PY{o}{=}\PY{n}{interval}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}print anim\PYZus{}to\PYZus{}html(anim)}
+             \PY{k}{return} \PY{n}{display\PYZus{}animation}\PY{p}{(}\PY{n}{anim}\PY{p}{,} \PY{n}{default\PYZus{}mode}\PY{o}{=}\PY{n}{mode}\PY{p}{)}
+\end{Verbatim}
+
+
+    Proizvoljan odabir stope rođenja i smrti se obavlja promjenom
+vrijednosti birth\_rate i death\_rate .
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{birth\PYZus{}rate} \PY{o}{=} \PY{l+m+mf}{0.7}
+         \PY{n}{death\PYZus{}rate} \PY{o}{=} \PY{l+m+mf}{0.3}
+         
+         \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{,} \PY{l+m+mi}{40}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{bool}\PY{p}{)}
+         \PY{n}{r} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{random}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)}
+         \PY{n}{X}\PY{p}{[}\PY{l+m+mi}{10}\PY{p}{:}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{:}\PY{l+m+mi}{30}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{r} \PY{o}{\PYZgt{}} \PY{l+m+mf}{0.75}\PY{p}{)}
+         \PY{n}{life\PYZus{}animation}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{birth\PYZus{}rate}\PY{p}{,} \PY{n}{death\PYZus{}rate}\PY{p}{,}  \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{frames}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{once}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} <IPython.core.display.HTML object>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{cd} \PY{n}{C}\PY{p}{:}\PYZbs{}\PY{n}{Users}\PYZbs{}\PY{n}{Vuksa}\PYZbs{}\PY{n}{Desktop}\PYZbs{}\PY{n}{zavrsni}\PY{o}{\PYZhy{}}\PY{n}{julia}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}Vuksa\textbackslash{}Desktop\textbackslash{}zavrsni-julia
+
+    \end{Verbatim}
+
+    \section{Langtonov mrav}\label{langtonov-mrav}
+
+\textbf{Langtonov mrav} je dvodimenzionalni univerzalni Turingov stroj s
+jednostavnim skupom pravila, ali kompleksnim pojavnim ponašanjem. Izumio
+ga je Chris Langton 1986. godine i može se opisati kao stanični automat,
+gdje je mreža obojena u crveno, a ćelija je mrav prošao sadrži jedno od
+8 različitih boja ovisno o broju prolaska kroz tu ćeliju. Pravila na za
+crno-bijelu mrežu: 1. Na bijeloj ćeliji, okreni se za 90 stupnjeva
+udesno, oboji tu ćeliju, prijeđi ćeliju naprijed 2. Na crnoj ćeliji
+okreni se za 90 stupnjeva ulijevo, oboji tu ćeliju, prijeđi u ćeliju
+naprijed
+
+Za obojenu mrežu vrijede ista pravila samo je potrebno boje poredati s
+obzirom na broj prolazaka kroz istu ćeliju tako da se boje međusobno
+izmjenjuju svakom iteracijom, s obzirom na pravila.
+
+Ovako jednostavna pravila vode ka kompleksnom ponašanju. Unutar prvih
+par stotina poteza, mrav stvara jednostavni uzorak koji je često
+simetričan. Napredujući dalje, dolazi do kaosa sa neregularnim uzorkom i
+širi ga narednih desetak tisuća koraka. Nakon toga mrav počinje stvarati
+uzorak koji se ponavlja svako 104 koraka u beskonačnosti i tvori
+takozvani "highway"(autocestu).
+
+Postoji proširenje Langtonovog mrava gdje umjesto dvije boje se koristi
+više boja. Boje se mjenjaju u cikličkom redoslijedu i koristi se
+imenovanje za svaku uzastopnu boju ovisno hoće li označavi zakretanje
+mrava ulijevo ("L") ili udesno ("R"). Tako standardni Langtonov mrav se
+naziva "RL". Također, postoji i proširenje s korištenjem većeg broja
+mravi. Podloga je isto dvodimenzionalna ploha, a uvrštavanje više mravi
+povečava kompleksnost konačnog rezultata. Nema potrebe za promatranje
+kolizije jer svaki mrav želi napraviti istu promjenu na ćeliji.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{k+kn}{import} \PY{n+nn}{PIL}
+         \PY{k+kn}{from} \PY{n+nn}{PIL} \PY{k}{import} \PY{n}{Image}
+         \PY{k+kn}{import} \PY{n+nn}{random}
+         \PY{k+kn}{import} \PY{n+nn}{os}
+         \PY{k+kn}{import} \PY{n+nn}{sys}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{scipy}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{from} \PY{n+nn}{\PYZus{}\PYZus{}future\PYZus{}\PYZus{}} \PY{k}{import} \PY{n}{print\PYZus{}function}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{cluster}
+         \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{c+c1}{\PYZsh{}ova skripta generira slike za 2D langtonov stanični automat}
+         \PY{c+c1}{\PYZsh{}SETTINGS}
+         
+         \PY{c+c1}{\PYZsh{}broj mravi}
+         \PY{n}{ants} \PY{o}{=} \PY{l+m+mi}{7}
+         \PY{c+c1}{\PYZsh{}ako je record = True onda se sprema slika svaki interval}
+         
+         \PY{n}{record} \PY{o}{=} \PY{k+kc}{False}
+         \PY{n}{frame\PYZus{}interval} \PY{o}{=} \PY{l+m+mi}{5000}
+         
+         \PY{c+c1}{\PYZsh{}ispis zadnje slike}
+         \PY{n}{record\PYZus{}final\PYZus{}image} \PY{o}{=} \PY{k+kc}{True}
+         
+         \PY{n}{scale} \PY{o}{=} \PY{l+m+mi}{1}
+         
+         \PY{c+c1}{\PYZsh{}visina i duzina slike}
+         \PY{n}{width} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{l+m+mi}{200}\PY{p}{)}
+         \PY{n}{length} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{l+m+mi}{200}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}postavljanje mrava u sredinu slike}
+         
+         \PY{n}{ant\PYZus{}pos} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{p}{(}\PY{n}{length}\PY{o}{*}\PY{n}{width}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{+} \PY{n+nb}{int}\PY{p}{(}\PY{n}{width}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)} 
+         
+         \PY{c+c1}{\PYZsh{}provjeri jeli mrav izašao iz okvira}
+         \PY{n}{oob} \PY{o}{=} \PY{k+kc}{False}
+         
+         \PY{c+c1}{\PYZsh{}broj iteracija tj. koraka mrava}
+         \PY{n}{iterations} \PY{o}{=} \PY{l+m+mi}{100000}
+         
+         \PY{c+c1}{\PYZsh{}imenovanje slika}
+         \PY{n}{number} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{iterations}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}postavljanje direkcije mravljeg prvog koraka 1\PYZhy{}\PYZhy{}\PYZgt{} desno; \PYZhy{}1 \PYZhy{}\PYZhy{}\PYZgt{} lijevo}
+         \PY{n}{direction} \PY{o}{=} \PY{l+m+mi}{1}
+         
+         \PY{c+c1}{\PYZsh{}inicijalizacija prazne slike}
+         \PY{n}{im1} \PY{o}{=} \PY{n}{Image}\PY{o}{.}\PY{n}{new}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RGBA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{(}\PY{n}{width}\PY{p}{,}\PY{n}{length}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{white}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}odabir boja}
+         \PY{n}{white} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{255}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{)}
+         \PY{n}{red} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{255}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{)}
+         \PY{n}{orange} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{255}\PY{p}{,}\PY{l+m+mi}{128}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{)}
+         \PY{n}{yellow} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{255}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{)}
+         \PY{n}{yellow\PYZus{}green} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{128}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{)}
+         \PY{n}{green} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{)}
+         \PY{n}{teal} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{)}
+         \PY{n}{light\PYZus{}blue} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{128}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{)}
+         \PY{n}{blue} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{)}
+         \PY{n}{purple} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{127}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{)}
+         \PY{n}{black} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{)}
+         \PY{n}{grey} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{150}\PY{p}{,}\PY{l+m+mi}{150}\PY{p}{,}\PY{l+m+mi}{150}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{)}
+         \PY{n}{other} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{40}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{)}
+         \PY{n}{brown} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{130}\PY{p}{,}\PY{l+m+mi}{90}\PY{p}{,}\PY{l+m+mi}{44}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{)}
+         \PY{n}{pink} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{244}\PY{p}{,}\PY{l+m+mi}{114}\PY{p}{,}\PY{l+m+mi}{208}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{)}
+         \PY{n}{mauve} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{118}\PY{p}{,}\PY{l+m+mi}{96}\PY{p}{,}\PY{l+m+mi}{138}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{)}
+         \PY{n}{magenta} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{216}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{115}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{)}
+         
+         \PY{n}{color\PYZus{}choices} \PY{o}{=} \PY{p}{[}\PY{n}{white}\PY{p}{,}\PY{n}{red}\PY{p}{,}\PY{n}{pink}\PY{p}{,}\PY{n}{other}\PY{p}{,}\PY{n}{magenta}\PY{p}{,}\PY{n}{black}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{}broj u string }
+         \PY{k}{def} \PY{n+nf}{num\PYZus{}to\PYZus{}string}\PY{p}{(}\PY{n}{num}\PY{p}{)}\PY{p}{:}
+             \PY{n}{binary} \PY{o}{=} \PY{n+nb}{bin}\PY{p}{(}\PY{n}{num}\PY{p}{)}
+             \PY{n}{moves} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}
+             \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{str}\PY{p}{(}\PY{n}{binary}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{p}{]}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{x} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                     \PY{n}{moves} \PY{o}{+}\PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{R}\PY{l+s+s2}{\PYZdq{}}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{moves} \PY{o}{+}\PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{L}\PY{l+s+s2}{\PYZdq{}}
+             \PY{k}{return} \PY{n}{moves}
+         
+         
+         \PY{c+c1}{\PYZsh{}definira listu stringova koji se koriste u main()}
+         \PY{n}{moves\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{n}{num\PYZus{}to\PYZus{}string}\PY{p}{(}\PY{n}{ant}\PY{p}{)} \PY{k}{for} \PY{n}{ant} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{ants}\PY{p}{)}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{}kreira se python dictionary}
+         \PY{n}{df\PYZus{}row\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}index=[0]}
+         
+         \PY{c+c1}{\PYZsh{}funkcije za pomicanje mrava}
+         \PY{k}{def} \PY{n+nf}{move\PYZus{}right}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{k}{global} \PY{n}{ant\PYZus{}pos}
+             \PY{c+c1}{\PYZsh{}pomicanje mrava udesno}
+             \PY{n}{ant\PYZus{}pos} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+             \PY{k}{return} \PY{n}{ant\PYZus{}pos}
+         \PY{k}{def} \PY{n+nf}{move\PYZus{}left}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{k}{global} \PY{n}{ant\PYZus{}pos}
+             \PY{c+c1}{\PYZsh{}pomicanje mrava ulijevo}
+             \PY{n}{ant\PYZus{}pos} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{1}
+             \PY{k}{return} \PY{n}{ant\PYZus{}pos}
+         \PY{k}{def} \PY{n+nf}{move\PYZus{}up}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{k}{global} \PY{n}{ant\PYZus{}pos}
+             \PY{c+c1}{\PYZsh{}pomicanje mrava put gore}
+             \PY{n}{ant\PYZus{}pos} \PY{o}{+}\PY{o}{=} \PY{n}{width}
+             \PY{k}{return} \PY{n}{ant\PYZus{}pos}
+         \PY{k}{def} \PY{n+nf}{move\PYZus{}down}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{k}{global} \PY{n}{ant\PYZus{}pos}
+             \PY{c+c1}{\PYZsh{}mpomicanje mrava put dolje}
+             \PY{n}{ant\PYZus{}pos} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{width}
+             \PY{k}{return} \PY{n}{ant\PYZus{}pos}
+         
+         \PY{k}{def} \PY{n+nf}{move}\PY{p}{(}\PY{n}{color}\PY{p}{,}\PY{n}{d}\PY{p}{)}\PY{p}{:}
+             \PY{k}{global} \PY{n}{direction}
+             \PY{k}{while} \PY{k+kc}{True}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{pix\PYZus{}list}\PY{p}{[}\PY{n}{ant\PYZus{}pos}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{==} \PY{n}{color} \PY{o+ow}{and} \PY{n}{direction} \PY{o}{==} \PY{n}{width}\PY{o}{*}\PY{n}{d}\PY{p}{:}
+                     \PY{c+c1}{\PYZsh{}postavi sljedeću boju s liste}
+                     \PY{n}{pix\PYZus{}list}\PY{p}{[}\PY{n}{ant\PYZus{}pos}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{color} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZpc{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{pixel\PYZus{}colors}\PY{p}{)}
+                     \PY{c+c1}{\PYZsh{}spremi trenutnu poziciju mrava}
+                     \PY{n}{init} \PY{o}{=} \PY{n}{ant\PYZus{}pos}
+                     \PY{c+c1}{\PYZsh{}pomakni mrava}
+                     \PY{n}{move\PYZus{}right}\PY{p}{(}\PY{p}{)}
+                     \PY{c+c1}{\PYZsh{}spremi poziciju mrava}
+                     \PY{n}{end} \PY{o}{=} \PY{n}{ant\PYZus{}pos}
+                     \PY{c+c1}{\PYZsh{}izracunaj novu direkciju mrava}
+                     \PY{n}{direction} \PY{o}{=} \PY{n}{end} \PY{o}{\PYZhy{}} \PY{n}{init}
+                     \PY{k}{break}
+         
+                 \PY{c+c1}{\PYZsh{}ista ideja kao i povise}
+                 \PY{k}{elif} \PY{n}{pix\PYZus{}list}\PY{p}{[}\PY{n}{ant\PYZus{}pos}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{==} \PY{n}{color} \PY{o+ow}{and} \PY{n}{direction} \PY{o}{==} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{o}{*}\PY{n}{width}\PY{o}{*}\PY{n}{d}\PY{p}{:}
+                     \PY{n}{pix\PYZus{}list}\PY{p}{[}\PY{n}{ant\PYZus{}pos}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{color} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZpc{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{pixel\PYZus{}colors}\PY{p}{)}
+                     \PY{n}{init} \PY{o}{=} \PY{n}{ant\PYZus{}pos}
+                     \PY{n}{move\PYZus{}left}\PY{p}{(}\PY{p}{)}
+                     \PY{n}{end} \PY{o}{=} \PY{n}{ant\PYZus{}pos}
+                     \PY{n}{direction} \PY{o}{=} \PY{n}{end} \PY{o}{\PYZhy{}} \PY{n}{init}
+                     \PY{k}{break}
+                 
+                 \PY{k}{elif} \PY{n}{pix\PYZus{}list}\PY{p}{[}\PY{n}{ant\PYZus{}pos}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{==} \PY{n}{color} \PY{o+ow}{and} \PY{n}{direction} \PY{o}{==} \PY{l+m+mi}{1}\PY{o}{*}\PY{n}{d}\PY{p}{:}
+                     \PY{n}{pix\PYZus{}list}\PY{p}{[}\PY{n}{ant\PYZus{}pos}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{color} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZpc{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{pixel\PYZus{}colors}\PY{p}{)}
+                     \PY{n}{init} \PY{o}{=} \PY{n}{ant\PYZus{}pos}
+                     \PY{n}{move\PYZus{}down}\PY{p}{(}\PY{p}{)}
+                     \PY{n}{end} \PY{o}{=} \PY{n}{ant\PYZus{}pos}
+                     \PY{n}{direction} \PY{o}{=} \PY{n}{end} \PY{o}{\PYZhy{}} \PY{n}{init}
+                     \PY{k}{break}
+                 
+                 \PY{k}{elif} \PY{n}{pix\PYZus{}list}\PY{p}{[}\PY{n}{ant\PYZus{}pos}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{==} \PY{n}{color} \PY{o+ow}{and} \PY{n}{direction} \PY{o}{==} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{o}{*}\PY{n}{d}\PY{p}{:}
+                     \PY{n}{pix\PYZus{}list}\PY{p}{[}\PY{n}{ant\PYZus{}pos}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{color} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZpc{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{pixel\PYZus{}colors}\PY{p}{)}
+                     \PY{n}{init} \PY{o}{=} \PY{n}{ant\PYZus{}pos}
+                     \PY{n}{move\PYZus{}up}\PY{p}{(}\PY{p}{)}
+                     \PY{n}{end} \PY{o}{=} \PY{n}{ant\PYZus{}pos}
+                     \PY{n}{direction} \PY{o}{=} \PY{n}{end} \PY{o}{\PYZhy{}} \PY{n}{init}
+                     \PY{k}{break}
+                 \PY{k}{break}
+         
+         \PY{c+c1}{\PYZsh{}zaustavlja seriju piksela za generiranje slika}
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}pix\PYZus{}series}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{k}{global} \PY{n}{pix\PYZus{}series}
+             \PY{n}{pix\PYZus{}series} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{pix\PYZus{}list}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{pixel\PYZus{}colors}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{pix\PYZus{}list}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{==} \PY{n}{y}\PY{p}{:}
+                         \PY{n}{pixel} \PY{o}{=} \PY{n}{pixel\PYZus{}colors}\PY{p}{[}\PY{n}{y}\PY{p}{]}
+                         \PY{n}{pix\PYZus{}series}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{pixel}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}pokreće mrava kroz mrežu s obzirom na pomake za zadani broj iteracija}
+         \PY{k}{def} \PY{n+nf}{run}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             
+             \PY{k}{global} \PY{n}{oob}
+             \PY{c+c1}{\PYZsh{}konverzija stringa u seriju 0 i 1; ti brojevi oznacavaju putanju}
+             \PY{n}{moves1} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1} \PY{k}{if} \PY{n}{x} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{R}\PY{l+s+s1}{\PYZsq{}} \PY{k}{else} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{moves}\PY{p}{]}
+             \PY{k}{for} \PY{n}{step} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{iterations}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{}izadi iz loopa ako je mrav izasao iz granica}
+                 \PY{k}{if} \PY{n}{ant\PYZus{}pos} \PY{o}{\PYZlt{}} \PY{n}{width} \PY{o+ow}{or} \PY{n}{ant\PYZus{}pos} \PY{o}{\PYZpc{}} \PY{n}{width} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n}{oob} \PY{o}{=} \PY{n}{step}
+                     \PY{k}{return}
+                 
+                 \PY{k}{for} \PY{n}{index}\PY{p}{,} \PY{n}{direction} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{moves1}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{try}\PY{p}{:}
+                         \PY{c+c1}{\PYZsh{}zapanti položaj mrava}
+                         \PY{n}{not\PYZus{}moved} \PY{o}{=} \PY{n}{ant\PYZus{}pos}
+                         \PY{c+c1}{\PYZsh{}pomakni njegovu poziciju}
+                         \PY{n}{move}\PY{p}{(}\PY{n}{index}\PY{p}{,}\PY{n}{direction}\PY{p}{)}
+                         \PY{c+c1}{\PYZsh{}provjeri jeli pomaknut}
+                         \PY{k}{if} \PY{n}{ant\PYZus{}pos} \PY{o}{!=} \PY{n}{not\PYZus{}moved}\PY{p}{:}
+                             
+                             \PY{k}{if} \PY{n}{record} \PY{o}{==} \PY{k+kc}{True}\PY{p}{:}
+                                 \PY{c+c1}{\PYZsh{}sprema sliku svaki frame\PYZus{}interval}
+                                 \PY{k}{if} \PY{n}{step} \PY{o}{\PYZpc{}} \PY{n}{frame\PYZus{}interval} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                                     \PY{n}{counter} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Generating frame number }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{counter}\PY{p}{)}\PY{p}{)}
+                                     \PY{n}{get\PYZus{}pix\PYZus{}series}\PY{p}{(}\PY{p}{)}
+                                     \PY{n}{save\PYZus{}image}\PY{p}{(}\PY{n}{counter}\PY{p}{)}
+                             \PY{k}{break}
+                         \PY{k}{else}\PY{p}{:}
+                             \PY{k}{continue}
+                     \PY{k}{except}\PY{p}{:} 
+                         
+                         \PY{n}{oob} \PY{o}{=} \PY{n}{step}
+                         \PY{k}{return}
+         
+         \PY{k}{def} \PY{n+nf}{save\PYZus{}image}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{:}
+             
+             \PY{k}{global} \PY{n}{im1}
+             \PY{c+c1}{\PYZsh{}ispuni praznu sliku sa podacima piksela}
+             \PY{n}{im1}\PY{o}{.}\PY{n}{putdata}\PY{p}{(}\PY{n}{pix\PYZus{}series}\PY{p}{)}
+             
+             \PY{n}{im1}\PY{o}{.}\PY{n}{resize}\PY{p}{(}\PY{p}{(}\PY{n}{scale}\PY{o}{*}\PY{n}{im1}\PY{o}{.}\PY{n}{size}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{scale}\PY{o}{*}\PY{n}{im1}\PY{o}{.}\PY{n}{size}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{.png}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{moves}\PY{p}{)}\PY{p}{)}
+             
+         \PY{c+c1}{\PYZsh{}pravi se dictionary za brojanje piksela u boji }
+         \PY{k}{def} \PY{n+nf}{build\PYZus{}df\PYZus{}row}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{colors\PYZus{}dict} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n+nb}{str}\PY{p}{(}\PY{n}{val}\PY{p}{)}\PY{p}{:} \PY{l+m+mi}{0} \PY{k}{for} \PY{n}{val}\PY{p}{,} \PY{n}{color} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{pixel\PYZus{}colors}\PY{p}{)}\PY{p}{\PYZcb{}}
+             \PY{n}{moves\PYZus{}dict} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{moves}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{moves}\PY{p}{\PYZcb{}}
+             \PY{n}{last\PYZus{}step} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{last\PYZus{}step}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{oob}\PY{p}{\PYZcb{}}
+             \PY{n}{row\PYZus{}dict} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n}{colors\PYZus{}dict}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{pix\PYZus{}list}\PY{p}{:}
+                 \PY{n}{pixel\PYZus{}color} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}print(pixel\PYZus{}color)}
+                 \PY{n}{row\PYZus{}dict}\PY{p}{[}\PY{n}{pixel\PYZus{}color}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+             \PY{k}{return} \PY{n}{row\PYZus{}dict}
+         
+         \PY{k}{for} \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{moves} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{moves\PYZus{}list}\PY{p}{)}\PY{p}{:}
+             \PY{n}{oob} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{dir\PYZus{}path} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{\PYZus{}}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}napravi novi direktorij za svakog novog mrava }
+             \PY{k}{if} \PY{n}{record} \PY{o}{==} \PY{k+kc}{True}\PY{p}{:}
+                 \PY{k}{if} \PY{o+ow}{not} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{isdir}\PY{p}{(}\PY{n}{dir\PYZus{}path}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{os}\PY{o}{.}\PY{n}{makedirs}\PY{p}{(}\PY{n}{dir\PYZus{}path}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{os}\PY{o}{.}\PY{n}{chdir}\PY{p}{(}\PY{n}{dir\PYZus{}path}\PY{p}{)}
+             
+             \PY{n}{ant\PYZus{}pos} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{p}{(}\PY{n}{length}\PY{o}{*}\PY{n}{width}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{+} \PY{n+nb}{int}\PY{p}{(}\PY{n}{width}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)} 
+             
+             \PY{c+c1}{\PYZsh{}moves = len(moves)}
+             \PY{n}{pixel\PYZus{}colors} \PY{o}{=} \PY{n}{color\PYZus{}choices}\PY{p}{[}\PY{p}{:}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{moves}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+             \PY{c+c1}{\PYZsh{}prazna lista elemenata [x,y,0] gdje su x i y pozicije, a 0 je nulta boja}
+             \PY{n}{pix\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{length}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{width}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{a} \PY{o}{=} \PY{p}{[}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+                     \PY{n}{pix\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}pix\PYZus{}series je lista piksela koja se prenosi u put\PYZus{}data za generiranje slike}
+             \PY{n}{pix\PYZus{}series} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{counter} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{run}\PY{p}{(}\PY{p}{)} 
+             \PY{n}{get\PYZus{}pix\PYZus{}series}\PY{p}{(}\PY{p}{)}
+             
+             \PY{n}{colors\PYZus{}dict} \PY{o}{=} \PY{n}{build\PYZus{}df\PYZus{}row}\PY{p}{(}\PY{p}{)}
+             \PY{n}{row\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{colors\PYZus{}dict}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{row\PYZus{}df}\PY{p}{,} \PY{n}{ignore\PYZus{}index}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+             
+             \PY{k}{if} \PY{n}{record\PYZus{}final\PYZus{}image} \PY{o}{==} \PY{k+kc}{True}\PY{p}{:}
+                 \PY{n}{os}\PY{o}{.}\PY{n}{chdir}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{expanduser}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZti{}/Desktop/zavrsni\PYZhy{}julia/CA\PYZus{}1/imgs/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{save\PYZus{}image}\PY{p}{(}\PY{n}{\PYZus{}}\PY{p}{)}
+                 \PY{n}{os}\PY{o}{.}\PY{n}{chdir}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+             
+             \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{\PYZus{}}\PY{p}{)}\PY{p}{,} \PY{n}{end}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+         \PY{n}{os}\PY{o}{.}\PY{n}{chdir}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{expanduser}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZti{}/Desktop/zavrsni\PYZhy{}julia/CA\PYZus{}1/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{df}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ants\PYZus{}hist\PYZus{}.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0 1 2 3 4 5 6 
+    \end{Verbatim}
+
+    \begin{figure}
+\centering
+\includegraphics{CA_1/imgs/RL.png}
+\caption{Slika 5. Langtonov mrav nakon 10000 iteracija}
+\end{figure}
+
+    
+
+    \begin{figure}
+\centering
+\includegraphics{LAA.png}
+\caption{Slika 6. Prvih 200 koraka mrava}
+\end{figure}
+
+	 \section{Zaključak}\label{zakljucak}
+Stanični automat je apstraktni model koji sadrži dvije glavne karakteristike. Prva je prostorna struktura automata, a drugo je sami konačni automat.
+Njihova svojstva se nalaze u mnogim aspektima svakodnevnog života, kao što je opisano u ovom radu.
+Počevši od elementarnih staničnih automata čija se pravila koriste u računalnoj sigurnosti
+i neka čak tvore univerzalni Turingov stroj, pa sve do složenijih oblika više-dimenzionalnih staničnih automata koji predstavljaju izazov programerima u njihovom rekonstruiranju na računalu. Iz staničnih automata John Conway razvija "Igru života" čiji se model
+reproduciranja može pronaći u životu živih bića (npr. razmnožavanje i smrt bizona opisan u radu). Koristeći par jednostavnih pravila dokazao je kaotičnu prirodu koju posjeduju stanični automati jer se iz jednostavnog uzorka mogu dobiti komplicirane strukture s nepravilnim promjenama prilikom stvaranja novih generacija.
+Za "Igru Života" pokazana su dva koda, od kojih je jedan u Python okruženju i pregledniji je za kompleksnije uzorke dok je drugi u Jupyter okruženju i pruža mogućnost zaustavljanja vremena i pregleda generacije u tom vremenu.
+Isto tako, postoji još jedan apstraktni model koji se zasniva na staničnim automatima, Langtonov mrav. On je ujedno i univerzalni Turingov stroj koji također iz jednostavnog uzorka i malim skupom pravila dobiva kompleksno ponašanje. 
+Stanični automati su samo još jedan primjer kako se ljudska svakodnevnica i općenito funkcioniranje različitih objekata i fenomena može opisati matematičkim modelom.
+
+
+
+\clearpage
+	 \section{Sažetak}\label{sazetak}
+Na početku ovog rada prikazana je povijest nastanka staničnih automata i način na koji je John von Neumann razvio ideju o njihovom postanku. Potom je iznesena sama definicija staničnih automata kao i opis osnovnih karakteristika koje ih označavaju. Iz klasifikacije se izdvaja elementarni stanični automat kao osnovni i najjednostavniji primjer takvog automata skupa s dvije podvrste, pravilo 110 i pravilo 30 koje su primjenjive u praksi i čine Turingov univerzalni stroj. Njihov grafički prikaz kao i prikaz svih 256 elementarnih staničnih automata omogućen je kroz kod napisan u Python-u. 
+Dva najpoznatija stanična automata su Conwayova "Igra Života" i Langtonov mrav koji imaju osobinu da se jednostavnim skupom pravila i minimalističkim inicijalnim uzorkom se može postići kaotično ponašanje pojedinih stanica kroz određeni broj generacija. "Igra Života" je, kao što samo ime sugerira, primjenjiva u različitim aspektima života pa je tako u ovom radu prikazan život bizona kroz njihovo razmnožavanje i umiranje. Isto tako, koristeći Python kod, moguće je prikazati ponašanje Langtonovog mrava kroz proizvoljan broj iteracija kao i ponašanje više mravi u istom sučelju. 
+Kroz rad je istaknuta važnost i primjena staničnih automata te je prikazano njihovo osnovno funkcioniranje kao i mogućnost interakcije s njima.
+
+
+\vspace {5mm}
+\textbf{Ključne riječi} : stanični automati, Igra Života, Langtonov mrav
+\clearpage
+
+\clearpage
+	 \section{Summary}\label{summary}
+\begin{center} \textbf{Cellular Automata} \end{center}
+At the beginning of this work we describe a brief history of the creation of Cellular Automata and how John von Neumann developed the idea of their existance. Afterwards, the definiton of Cellular Automata and the description of their main characteristics is given. From the classification, Elementary Cellular Automata stand out as most basic and simple example of the mathematical model with two sublayers, rule 110 and rule 30 which are useful in practice and are Turing completes. Their description and the description of all 256 Elementary Cellular Automata are shown using of Python.
+Two most known Cellular Automata are Conway's Game of Life and Langton's Ant which have the ability to show, from a very simple set of rules and a minimalistic initial sample, a chaotic behaviour of each cell throughout specific number of generations. Game of Life is, as the name sugests, useful in different aspects of life which is shown in this paper as life of bisons, their population depending on birth and death rates. On the other hand, using Python, it is possible to show the behaviour of Langton's Ant under changes of the variables such as the number of iterations and number of ants that move in the same space.
+The importance and practicality od Cellular Automata are demonstrated together with the basic functionality and the ability to interact with them.
+
+ \vspace {5mm}
+\textbf{Key words} : Cellular Automata, Game of Life, Langton's ant
+\clearpage
+    % Add a bibliography block to the postdoc
+\begin{thebibliography}{9}
+\bibitem{prva} Cellular Automata: A Parallel Model; Marianne Delorme, Jacques Mazoyer; Springer; 1st edition (December 31, 1998)
+\bibitem{druga} Additive Cellular Automata: Theory and Applications; Parimal Pal Chaudhuri, Dipanwita Roy Chowdhury, Sukumar Nandi; Wiley-IEEE Computer Society Pr; 1st edition (July 11, 1997)
+\bibitem{treca} Identification of Cellular Automata; Andrew Adamatzky; CRC; 1 edition (November 25, 1994)
+\bibitem{cetvrta} Weisstein, Eric W. "Langton's ant". S Interneta, http://mathworld.wolfram.com/LangtonsAnt.html
+\end{thebibliography}    
+    
+    
+    \end{document}
